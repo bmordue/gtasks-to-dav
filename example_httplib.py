@@ -110,7 +110,7 @@ def digest_response(authheader, method, uri):
 def make_request(method, server_path, content):
     connection = httplib.HTTPConnection(SERVER_HOST, SERVER_PORT)
     connection.putrequest(method, server_path)
-    connection.putheader('Authorization', auth_string)
+#    connection.putheader('Authorization', auth_string)
     connection.putheader('User-Agent', CLIENT_AGENT)
     connection.putheader('Depth', 1)
     connection.putheader('Content-Length', str(len(content)))
@@ -135,7 +135,7 @@ def make_request(method, server_path, content):
         connection.putheader('User-Agent', CLIENT_AGENT)
         connection.putheader('Depth', 1)
         connection.putheader('Content-Length', str(len(content)))
-        connection.putheader('If-None-Match', '*')
+#        connection.putheader('If-None-Match', '*')
 
         connection.endheaders()
         connection.send(content)
@@ -149,7 +149,7 @@ def make_request(method, server_path, content):
 
 def main():
 #   make_request("PROPFIND", "http://dav.benmordue.co.uk/cal.php/calendars/labuser/named/", DEPTH)
-    make_request("PUT", "/cal.php/calendars/labuser/named/todo1.ics", CAL_EVENT)
+    make_request("PUT", "/cal.php/calendars/labuser/named/todo2.ics", CAL_TODO)
 
 
 if __name__ == "__main__":
