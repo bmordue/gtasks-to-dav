@@ -110,7 +110,8 @@ def digest_response(authheader, method, uri):
 def make_request(method, server_path, content):
     connection = httplib.HTTPConnection(SERVER_HOST, SERVER_PORT)
     connection.putrequest(method, server_path)
-#    connection.putheader('Authorization', auth_string)
+    auth_string = ''
+    connection.putheader('Authorization', auth_string)
     connection.putheader('User-Agent', CLIENT_AGENT)
     connection.putheader('Depth', 1)
     connection.putheader('Content-Length', str(len(content)))
@@ -142,15 +143,18 @@ def make_request(method, server_path, content):
         response = connection.getresponse()
         print ''
         print ''
-        print response.status
+        print "Response status: %s" % response.status
+        print "Response headers: "
         for header, value in response.getheaders():
             print "%s : %s" % (header, value)
         print response.read()
 
 def main():
-#   make_request("PROPFIND", "http://dav.benmordue.co.uk/cal.php/calendars/labuser/named/", DEPTH)
-    make_request("PUT", "/cal.php/calendars/labuser/named/todo2.ics", CAL_TODO)
-
+    make_request("PROPFIND", "http://dav.benmordue.co.uk/cal.php/calendars/labuser/named/", DEPTH)
+    # make_request("PUT", "/cal.php/calendars/labuser/named/todo2.ics", CAL_TODO)
+    f = open('../tusks/out.ics', 'r');
+    # make_request("PUT", "/cal.php/calendars/labuser/named/gtasks.ics", f.read());
+    f.close();
 
 if __name__ == "__main__":
     main()
