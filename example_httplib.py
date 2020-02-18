@@ -3,15 +3,14 @@ import httplib
 import hashlib
 
 # Caldav url
-url = "http://dav.benmordue.co.uk/cal.php/calendars/labuser/"
-calendar_url = "http://dav.benmordue.co.uk/cal.php/calendars/labuser/named"
+# url = "http://dav.benmordue.co.uk/cal.php/calendars/labuser/"
+# calendar_url = "http://dav.benmordue.co.uk/cal.php/calendars/labuser/named"
 
-USERNAME = "labuser"
+USERNAME = "ben"
 PASSWORD="tester"
-SERVER_HOST = 'dav.benmordue.co.uk'
-SERVER_PORT = 80
-SERVER_PATH = '/cal.php/calendars/labuser/'
-CLIENT_AGENT = 'example_httplib/v1'
+SERVER_HOST = 'http://93.170.105.134:5232'
+SERVER_PORT = 5232
+CLIENT_AGENT = 'scripted/v1'
 
 CAL_EVENT = """BEGIN:VCALENDAR
 VERSION:2.0
@@ -150,11 +149,11 @@ def make_request(method, server_path, content):
         print response.read()
 
 def main():
-    make_request("PROPFIND", "http://dav.benmordue.co.uk/cal.php/calendars/labuser/named/", DEPTH)
+    make_request("PROPFIND", "/ben", DEPTH)
     # make_request("PUT", "/cal.php/calendars/labuser/named/todo2.ics", CAL_TODO)
-    f = open('../tusks/out.ics', 'r');
+    # f = open('../tusks/out.ics', 'r');
     # make_request("PUT", "/cal.php/calendars/labuser/named/gtasks.ics", f.read());
-    f.close();
+    # f.close();
 
 if __name__ == "__main__":
     main()
